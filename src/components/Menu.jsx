@@ -1,22 +1,35 @@
-import React from 'react'
-import Pizza from './Pizza'
-
-
+import React from "react";
+import Pizza from "./Pizza";
 
 const Menu = (props) => {
-  const data = [...props.allData]
-  console.log(data)
+  const pizzaData = props.allData;
+  // const pizzaData = [];
+  const numPizzas = pizzaData.length;
   return (
     <main className={props.className}>
       <h2>Our Menu</h2>
-      <Pizza name={data[0].name} ingredients={data[0].ingredients} price={data[0].price} photoName={data[0].photoName} soldOut={data[0].soldOut}/>
-      <Pizza name={data[1].name} ingredients={data[1].ingredients} price={data[0].price} photoName={data[1].photoName} soldOut={data[1].soldOut}/>
-      <Pizza name={data[2].name} ingredients={data[2].ingredients} price={data[0].price} photoName={data[2].photoName} soldOut={data[2].soldOut}/>
-      <Pizza name={data[3].name} ingredients={data[3].ingredients} price={data[0].price} photoName={data[3].photoName} soldOut={data[3].soldOut}/>
-      <Pizza name={data[4].name} ingredients={data[4].ingredients} price={data[0].price} photoName={data[4].photoName} soldOut={data[4].soldOut}/>
-      <Pizza name={data[5].name} ingredients={data[5].ingredients} price={data[0].price} photoName={data[5].photoName} soldOut={data[5].soldOut}/>
+      {numPizzas > 0 ? (
+        <>
+          <p>
+            Authentic Italian cuisine. 6 creative dishes to choose from. All
+            from our stove oven, all organic, all delicious.
+          </p>
+          <ul className={props.pizzaClassName}>
+            {pizzaData.map((pizza) => (
+              <Pizza
+                pizzaObj={pizza}
+                key={pizza.name}
+                className={props.elementClassName}
+                classNameSoldOut={props.elementSoldOutClassName}
+              />
+            ))}
+          </ul>
+        </>
+      ) : (
+        <p>We're still working on our menu!</p>
+      )}
     </main>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;
